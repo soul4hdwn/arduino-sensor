@@ -2,8 +2,8 @@
 #include <Wire.h> //for I2C, needed for shields and most breakouts
 #include <SparkFun_MMA8452Q.h>
 #include <SPI.h>  //required by other libraries for cross communication
-//#include <WiFiNINA.h>
-#include <WiFi.h>
+#include <WiFiNINA.h>
+//#include <WiFi.h>
 #include <SD.h>
 
 
@@ -76,15 +76,13 @@ void setup() {
   }
   Serial.println("Initializing...");
 
-  //if (WiFi.status() == WL_NO_MODULE) { //nina library/module
-  if (WiFi.status() == WL_NO_SHIELD) { 
+  if (WiFi.status() == WL_NO_MODULE) {
     Serial.println("Communication with WiFi module failed!");
     while (true); // don't continue
   }
 
   String fv = WiFi.firmwareVersion();
-  if (fv != "1.1.0") {
-  //if (fv < WIFI_FIRMWARE_LATEST_VERSION) { //nina library/module
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
     Serial.println("Please upgrade the firmware");
   }
 
